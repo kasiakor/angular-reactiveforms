@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Customer } from './customer';
 
@@ -15,15 +15,25 @@ export class CustomerComponent implements OnInit {
   //data model, data send to/from the back end server
   customer = new Customer();
 
-  constructor() { }
+  constructor( private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.customerForm =  new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl(),
-      sendCatalog: new FormControl()
+    //use form builder to build the form model
+    //group method takes in control configuration object 
+    this.customerForm = this.fb.group({
+      firstName: '',
+      lastName: '',
+      email: '',
+      sendCatalog: true
     })
+
+
+    // this.customerForm =  new FormGroup({
+    //   firstName: new FormControl(),
+    //   lastName: new FormControl(),
+    //   email: new FormControl(),
+    //   sendCatalog: new FormControl()
+    // })
   }
   //update all form data from the component
   // populateTestData(): void {
