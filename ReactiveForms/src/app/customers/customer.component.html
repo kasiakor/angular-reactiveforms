@@ -111,7 +111,8 @@
               <input class="form-check-input"
                      type="radio"
                      value="email"
-                     formControlName="notification">Email
+                     formControlName="notification"
+                     (click)="setNotification('email')">Email
             </label>
           </div>
           <div class="form-check form-check-inline">
@@ -119,7 +120,8 @@
               <input class="form-check-input"
                      type="radio"
                      value="text"
-                     formControlName="notification">Text
+                     formControlName="notification"
+                     (click)="setNotification('text')">Text
             </label>
           </div>
         </div>

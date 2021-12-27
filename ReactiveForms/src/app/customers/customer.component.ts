@@ -24,6 +24,8 @@ export class CustomerComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
+      phone: '',
+      notification: 'email',
       sendCatalog: true
     })
 
@@ -52,6 +54,17 @@ export class CustomerComponent implements OnInit {
         lastName: "New",
         sendCatalog: false
     })
+  }
+  // set validation rule to phone when text notification selected in the form
+  setNotification(notifyBy: string): void {
+    const phoneControl = this.customerForm.get('phone');
+    if( notifyBy === 'text') {
+      phoneControl.setValidators(Validators.required)
+    }
+    else {
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
   }
 
   save(): void {
