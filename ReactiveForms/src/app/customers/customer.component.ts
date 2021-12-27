@@ -25,6 +25,24 @@ export class CustomerComponent implements OnInit {
       sendCatalog: new FormControl()
     })
   }
+  //update all form data from the component
+  // populateTestData(): void {
+  //   this.customerForm.setValue({
+  //       firstName: "Jack",
+  //       lastName: "New",
+  //       email: "jack.new@gmail.com",
+  //       sendCatalog: false
+  //   })
+  // }
+
+  //update some form data from the component
+  populateTestData(): void {
+    this.customerForm.patchValue({
+        firstName: "Jack",
+        lastName: "New",
+        sendCatalog: false
+    })
+  }
 
   save(): void {
     console.log(this.customerForm);
