@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Customer } from './customer';
 
+//custom validator
+function ratingRange(c: AbstractControl): {[key: string]: boolean} | null {
+ if( c.value !== null && (isNaN(c.value) || c.value < 1 || c.value > 5 )) {
+   //if validation is broken key/value pair is returned key for rule, true for error
+   return {'range': true};
+ }
+ //null for not broken rules, formcontrol is valid
+ return null;
+}
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -52,6 +61,7 @@ export class CustomerComponent implements OnInit {
     this.customerForm.patchValue({
         firstName: "Jack",
         lastName: "New",
+        rating: [null, ratingRange],
         sendCatalog: false
     })
   }
