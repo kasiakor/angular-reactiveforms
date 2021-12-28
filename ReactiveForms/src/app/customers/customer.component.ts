@@ -57,14 +57,8 @@ export class CustomerComponent implements OnInit {
       notification: 'email',
       rating: [null, ratingRange(1,5)],
       sendCatalog: true,
-      addresses: this.fb.group({
-        addressType: 'home',
-        street1: '',
-        street2: '',
-        state: '',
-        city: '',
-        zip: ''
-      })
+      //we create the first instance that we add to the form model
+      addresses: this.buildAddress()
     });
 
     //subscribe to observable for value changes
@@ -106,6 +100,18 @@ export class CustomerComponent implements OnInit {
   //       sendCatalog: false
   //   })
   // }
+
+  //function to be called when we need an instance of the form group fro address
+  buildAddress(): FormGroup {
+    return this.fb.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      state: '',
+      city: '',
+      zip: ''
+    })
+  }
 
   //update some form data from the component
   populateTestData(): void {
