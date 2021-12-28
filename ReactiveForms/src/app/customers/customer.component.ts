@@ -106,6 +106,11 @@ export class CustomerComponent implements OnInit {
   //   })
   // }
 
+  //add address when user clicks a button
+  addAddress(): void {
+    this.addresses.push(this.buildAddress());
+  }
+
   //function to be called when we need an instance of the form group fro address
   buildAddress(): FormGroup {
     return this.fb.group({
