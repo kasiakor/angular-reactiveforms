@@ -7,6 +7,7 @@ import { Customer } from './customer';
 function ratingRange(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): {[key: string]: boolean} | null => {
     if( c.value !== null && (isNaN(c.value) || c.value < min || c.value > max )) {
+      //validation error object
       return {'range': true};
     }
     return null;
@@ -47,7 +48,10 @@ export class CustomerComponent implements OnInit {
       notification: 'email',
       rating: [null, ratingRange(1,5)],
       sendCatalog: true
-    })
+    });
+
+    //subscribe to observable for value changes
+    this.customerForm.get('notification').valueChanges.subscribe( value => console.log(value));
 
 
     // this.customerForm =  new FormGroup({
