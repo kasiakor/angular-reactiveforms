@@ -56,7 +56,15 @@ export class CustomerComponent implements OnInit {
       phone: '',
       notification: 'email',
       rating: [null, ratingRange(1,5)],
-      sendCatalog: true
+      sendCatalog: true,
+      addresses: this.fb.group({
+        addressType: 'home',
+        street1: '',
+        street2: '',
+        state: '',
+        city: '',
+        zip: ''
+      })
     });
 
     //subscribe to observable for value changes
