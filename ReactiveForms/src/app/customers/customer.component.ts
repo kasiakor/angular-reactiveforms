@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
 import { Customer } from './customer';
@@ -43,6 +43,10 @@ export class CustomerComponent implements OnInit {
     email: 'Add valid email address'
   };
 
+  get addresses(): FormArray {
+    return <FormArray>this.customerForm.get('addresses');
+  }
+
 
   constructor( private fb:FormBuilder) { }
 
@@ -58,7 +62,7 @@ export class CustomerComponent implements OnInit {
       rating: [null, ratingRange(1,5)],
       sendCatalog: true,
       //we create the first instance that we add to the form model
-      addresses: this.buildAddress()
+      addresses: this.fb.array([this.buildAddress()])
     });
 
     //subscribe to observable for value changes
