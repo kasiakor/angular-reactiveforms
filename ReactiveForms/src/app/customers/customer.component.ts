@@ -34,6 +34,14 @@ export class CustomerComponent implements OnInit {
 
   //data model, data send to/from the back end server
   customer = new Customer();
+  emailMessage: string;
+  
+  //add property to store validation messages
+  private validationMessages = {
+    required: 'Add required email address',
+    email: 'Add valid email address'
+  };
+
 
   constructor( private fb:FormBuilder) { }
 
@@ -54,12 +62,28 @@ export class CustomerComponent implements OnInit {
     this.customerForm.get('notification').valueChanges.subscribe( value => this.setNotification(value));
 
 
+    //add watcher on email form control
+    const emailControl = this.customerForm.get('email');
+    emailControl.valueChanges.subscribe( value => this.setMessage(emailControl));
+
+
     // this.customerForm =  new FormGroup({
     //   firstName: new FormControl(),
     //   lastName: new FormControl(),
     //   email: new FormControl(),
     //   sendCatalog: new FormControl()
     // })
+  }
+  setMessage(c: AbstractControl): void {
+    this.emailMessage = '';
+    if((c.touched || c.dirty) && c.errors) {
+      console.log('c errors:', c.errors, typeof(c.errors));
+        this.emailMessage = Object.keys(c.errors).map(
+          key => console.log('Validation messages key value, that is a message:', this.validationMessages[key])).join(' ')
+          console.log('Object keys:',Object.keys(c.errors));
+          console.log('Validation messages object:',this.validationMessages);
+
+    };
   }
   //update all form data from the component
   // populateTestData(): void {
