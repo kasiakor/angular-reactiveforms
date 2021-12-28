@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 import { Customer } from './customer';
 
@@ -64,7 +65,10 @@ export class CustomerComponent implements OnInit {
 
     //add watcher on email form control
     const emailControl = this.customerForm.get('email');
-    emailControl.valueChanges.subscribe( value => this.setMessage(emailControl));
+    emailControl.valueChanges.pipe(
+      debounceTime(1000)
+    )
+    .subscribe( value => this.setMessage(emailControl));
 
 
     // this.customerForm =  new FormGroup({
