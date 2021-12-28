@@ -44,7 +44,7 @@ export class CustomerComponent implements OnInit {
   };
 
   get addresses(): FormArray {
-    return <FormArray>this.customerForm.get('addresses');
+    return <FormArray>this.customerForm.get('addresses')
   }
 
 
@@ -94,6 +94,7 @@ export class CustomerComponent implements OnInit {
           console.log('Validation messages object:',this.validationMessages);
 
     };
+    console.log(this.customerForm);
   }
   //update all form data from the component
   // populateTestData(): void {
