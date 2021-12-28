@@ -51,7 +51,7 @@ export class CustomerComponent implements OnInit {
     });
 
     //subscribe to observable for value changes
-    this.customerForm.get('notification').valueChanges.subscribe( value => console.log(value));
+    this.customerForm.get('notification').valueChanges.subscribe( value => this.setNotification(value));
 
 
     // this.customerForm =  new FormGroup({
